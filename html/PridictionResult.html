@@ -156,11 +156,10 @@
 
     </div>
     <!-- /Breadcrumb -->
-Here we go
 
 
     <br/>
-    
+
     <div class="row">
     <!-- form -->
     <div class="col s12 l5">
@@ -235,8 +234,40 @@ Open Hours Sat-Sun:
     </div>
     </div>
     <div class="col s12 l7">
+    <div class="card-panel">
+    <h4>Results</h4>
+    
+<div>
+<h5>Sucess Rating</h5>
+    <div class="progress">
+      <div class="active striped green" style="width: 70%">
+        <span>70%</span>
+      </div>
+    </div>
+    <div >
+    <h5>Suggestion</h5>
+    <p>Dinner, Lunch etc</p></div>
+</div>
+<div>
+<h5>Near By Area</h5>
+<p>95112</p>
+    <div class="progress">
+   
+      <div class="active striped bule" style="width: 70%">
+        <span>70%</span>
+      </div>
+    </div>
+   
+</div>
+
+    </div>
+    <div class="card-panel">
+    <h4>Line</h4>
+          <div id="rickshawLine" ></div>
+    </div>
     <div class="card-panel center-align">
-    <h4>Pie Chart</h4>
+    
+        <h4>Pie Chart</h4>
           <div id="flotPieChart" style="height: 400px"></div>
     </div>
     </div>
@@ -376,18 +407,168 @@ Open Hours Sat-Sun:
   <script type="text/javascript" src="assets/flot/jquery.flot.pie.min.js"></script>
   <script type="text/javascript" src="assets/flot/jquery.flot.tooltip.min.js"></script>
   <script type="text/javascript" src="assets/flot/jquery.flot.categories.min.js"></script>
+    <script type="text/javascript" src="assets/d3/d3.min.js"></script>
+    <script type="text/javascript" src="assets/rickshaw/rickshaw.min.js"></script>
       <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
     <script type="text/javascript" src="assets/gmaps/gmaps.min.js"></script>
     <script>
+	function makestars(y){
+		var inty=Math.floor(y);
+
+		switch(inty) {
+    case 1:
+var htmlstar="<div class='rating'>"+
+              "<input id='rating-star-5' name='rating-star' value='5' type='radio'>"+
+              "<label for='rating-star-5'><i class='ion-star'></i>"+
+              "</label>"+
+              "<input id='rating-star-4' name='rating-star' value='4'  type='radio'>"+
+              "<label for='rating-star-4'><i class='ion-star'></i>"+
+              "</label>"+
+              "<input id='rating-star-3' name='rating-star' value='3'   type='radio'>"+
+              "<label for='rating-star-3'><i class='ion-star'></i>"+
+              "</label>"+
+              "<input id='rating-star-2' name='rating-star' value='2' type='radio'>"+
+              "<label for='rating-star-2'><i class='ion-star'></i>"+
+              "</label>"+
+              "<input id='rating-star-1' name='rating-star' value='1' checked=''  type='radio'>"+
+              "<label for='rating-star-1'><i class='ion-star'></i>"+
+              "</label>"+
+            "</div>";
+						return htmlstar;
+        break;
+    case 2:
+var htmlstar="<div class='rating'>"+
+              "<input id='rating-star-5' name='rating-star' value='5' type='radio'>"+
+              "<label for='rating-star-5'><i class='ion-star'></i>"+
+              "</label>"+
+              "<input id='rating-star-4' name='rating-star' value='4'  type='radio'>"+
+              "<label for='rating-star-4'><i class='ion-star'></i>"+
+              "</label>"+
+              "<input id='rating-star-3' name='rating-star' value='3'   type='radio'>"+
+              "<label for='rating-star-3'><i class='ion-star'></i>"+
+              "</label>"+
+              "<input id='rating-star-2' name='rating-star' value='2' checked='' type='radio'>"+
+              "<label for='rating-star-2'><i class='ion-star'></i>"+
+              "</label>"+
+              "<input id='rating-star-1' name='rating-star' value='1'  type='radio'>"+
+              "<label for='rating-star-1'><i class='ion-star'></i>"+
+              "</label>"+
+            "</div>";
+						return htmlstar;
+        break;
+		case 3:
+var htmlstar="<div class='rating'>"+
+              "<input id='rating-star-5' name='rating-star' value='5' type='radio'>"+
+              "<label for='rating-star-5'><i class='ion-star'></i>"+
+              "</label>"+
+              "<input id='rating-star-4' name='rating-star' value='4'  type='radio'>"+
+              "<label for='rating-star-4'><i class='ion-star'></i>"+
+              "</label>"+
+              "<input id='rating-star-3' name='rating-star' value='3' checked=''  type='radio'>"+
+              "<label for='rating-star-3'><i class='ion-star'></i>"+
+              "</label>"+
+              "<input id='rating-star-2' name='rating-star' value='2' type='radio'>"+
+              "<label for='rating-star-2'><i class='ion-star'></i>"+
+              "</label>"+
+              "<input id='rating-star-1' name='rating-star' value='1'  type='radio'>"+
+              "<label for='rating-star-1'><i class='ion-star'></i>"+
+              "</label>"+
+            "</div>";
+						return htmlstar;
+        break;
+		case 4:
+        var htmlstar="<div class='rating'>"+
+              "<input id='rating-star-5' name='rating-star' value='5' type='radio'>"+
+              "<label for='rating-star-5'><i class='ion-star'></i>"+
+              "</label>"+
+              "<input id='rating-star-4' name='rating-star' value='4' checked='' type='radio'>"+
+              "<label for='rating-star-4'><i class='ion-star'></i>"+
+              "</label>"+
+              "<input id='rating-star-3' name='rating-star' value='3'   type='radio'>"+
+              "<label for='rating-star-3'><i class='ion-star'></i>"+
+              "</label>"+
+              "<input id='rating-star-2' name='rating-star' value='2' type='radio'>"+
+              "<label for='rating-star-2'><i class='ion-star'></i>"+
+              "</label>"+
+              "<input id='rating-star-1' name='rating-star' value='1'  type='radio'>"+
+              "<label for='rating-star-1'><i class='ion-star'></i>"+
+              "</label>"+
+            "</div>";
+						return htmlstar;
+        break;
+		case 5:
+       var htmlstar="<div class='rating'>"+
+              "<input id='rating-star-5' name='rating-star' value='5' checked='' type='radio'>"+
+              "<label for='rating-star-5'><i class='ion-star'></i>"+
+              "</label>"+
+              "<input id='rating-star-4' name='rating-star' value='4'  type='radio'>"+
+              "<label for='rating-star-4'><i class='ion-star'></i>"+
+              "</label>"+
+              "<input id='rating-star-3' name='rating-star' value='3'   type='radio'>"+
+              "<label for='rating-star-3'><i class='ion-star'></i>"+
+              "</label>"+
+              "<input id='rating-star-2' name='rating-star' value='2' type='radio'>"+
+              "<label for='rating-star-2'><i class='ion-star'></i>"+
+              "</label>"+
+              "<input id='rating-star-1' name='rating-star' value='1'  type='radio'>"+
+              "<label for='rating-star-1'><i class='ion-star'></i>"+
+              "</label>"+
+            "</div>";
+			return htmlstar;
+        break;
+    default:
+        return "";
+} 
+		
+		}
+	/*var rickshawLine1 = [ { "x": 0, "y": 3.5 }, { "x": 1, "y": 3 }, { "x": 2, "y": 5.0 }, { "x": 3, "y": 4.7 }, { "x": 4, "y": 2 },{ "x": 5, "y": 3.5 }, { "x": 6, "y": 3 }, { "x": 7, "y": 5.0 }, { "x": 8, "y": 4.7 }, { "x": 9, "y": 2 },{ "x": 10, "y": 3.5 }, { "x": 11, "y": 3 }, { "x": 12, "y": 5 }, { "x": 13, "y": 4.7 }, { "x": 14, "y": 5.0 } ];*/
+	var rickshawLine1=[{"x":1,"y":2.0},{"x":2,"y":2.5},{"x":3,"y":2.0},{"x":4,"y":3.5},{"x":5,"y":3.5},{"x":6,"y":3.0},{"x":7,"y":3.5},{"x":8,"y":2.5},{"x":9,"y":2.5},{"x":10,"y":2.5},{"x":11,"y":3.0},{"x":12,"y":3.0},{"x":13,"y":3.0},{"x":14,"y":3.0},{"x":15,"y":3.0},{"x":16,"y":4.0},{"x":17,"y":4.0},{"x":18,"y":3.5},{"x":19,"y":2.0},{"x":20,"y":2.5},{"x":21,"y":3.0},{"x":22,"y":3.5},{"x":23,"y":3.0},{"x":24,"y":3.5},{"x":25,"y":2.0},{"x":26,"y":4.0},{"x":27,"y":3.5},{"x":28,"y":4.0},{"x":29,"y":3.5},{"x":30,"y":3.0},{"x":31,"y":4.0},{"x":32,"y":4.0},{"x":33,"y":4.0},{"x":34,"y":2.5},{"x":35,"y":4.0}];
+    
+	(function() {
+      var element = $("#rickshawLine");
+      var graph = new Rickshaw.Graph( {
+        element: element[0],
+        renderer: 'line',
+        stroke: true,
+        series: [ {
+          data: rickshawLine1,
+          color: '#673ab7',
+          name: 'Business Rating'
+        },{
+			data:[{ x: 0, y: 5.1 }],
+			color:'#ffffff',
+			
+			}]
+      } );
+      graph.render();
+    
+      var hoverDetail = new Rickshaw.Graph.HoverDetail({
+        graph: graph,
+        xFormatter: function(x) { return "" },
+        yFormatter: function(y) { var stars=makestars(y)
+		return stars; }
+      });
+    
+      // responsive
+      $(window).on('resize', function() {
+        graph.configure({
+          width: element.width()
+        });
+        graph.render();
+      });
+    }());
+    
+    
     (function() {
       var chart = $("#flotPieChart");
-      var data = [
+      /*var data = [
           { label: "IE",  data: 19.5, color: "#90a4ae"},
           { label: "Safari",  data: 4.5, color: "#7986cb"},
           { label: "Firefox",  data: 36.6, color: "#9575cd"},
           { label: "Opera",  data: 2.3, color: "#4db6ac"},
           { label: "Chrome",  data: 36.3, color: "#64b5f6"}
-      ];
+      ];*/
+      var data=[{"data":0,"color":"#90a4ae","label":1.0},{"data":4,"color":"#7986cb","label":2.0},{"data":8,"color":"#9575cd","label":4.0},{"data":0,"color":"#4db6ac","label":4.5},{"data":6,"color":"#64b5f6","label":2.5},{"data":1,"color":"#CC3399","label":5.0},{"data":0,"color":"#990099","label":1.5},{"data":9,"color":"#FF0066","label":3.0},{"data":8,"color":"#FFFF99","label":3.5}];
       var options = {
         series: {
           pie: {
